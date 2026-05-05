@@ -1,0 +1,173 @@
+{
+  "en": {
+    "app": {
+      "name": "TurboOrder",
+      "tagline": "Smart Sales Management"
+    },
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "search": "Search...",
+      "filter": "Filter",
+      "export": "Export",
+      "import": "Import",
+      "back": "Back",
+      "confirm": "Confirm",
+      "loading": "Loading...",
+      "no_data": "No data",
+      "not_updated": "Not updated",
+      "actions": "Actions",
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "auth": {
+      "login": "Login",
+      "logout": "Logout",
+      "email": "Email",
+      "password": "Password",
+      "remember_me": "Remember me",
+      "login_success": "Login successful",
+      "login_failed": "Invalid email or password"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "products": "Products",
+      "customers": "Customers",
+      "settings": "Settings"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "revenue": "Revenue",
+      "profit": "Profit",
+      "new_orders": "New Orders",
+      "items_sold": "Items Sold",
+      "new_customers": "New Customers",
+      "today": "Today",
+      "this_week": "This Week",
+      "this_month": "This Month",
+      "this_year": "This Year",
+      "quick_actions": "Quick Actions",
+      "create_order": "Create Order",
+      "add_product": "Add Product",
+      "add_customer": "Add Customer"
+    },
+    "orders": {
+      "title": "Orders",
+      "create": "Create Order",
+      "order_number": "Order #",
+      "customer": "Customer",
+      "total": "Total",
+      "status": {
+        "label": "Status",
+        "new": "New",
+        "confirmed": "Confirmed",
+        "shipping": "Shipping",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "date": "Date",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "note": "Note",
+      "items": "Items",
+      "quantity": "Quantity",
+      "unit_price": "Unit Price",
+      "add_item": "Add Item",
+      "select_customer": "Select Customer",
+      "create_success": "Order created successfully",
+      "status_updated": "Status updated successfully",
+      "cancel_reason": "Cancel reason",
+      "cancel_reason_placeholder": "Enter cancel reason...",
+      "cancel_confirm": "Are you sure you want to cancel this order?",
+      "edit": "Edit order",
+      "update_success": "Order updated successfully",
+      "save_changes": "Save changes",
+      "not_editable": "Only unconfirmed orders can be edited",
+      "delete_success": "Order deleted successfully",
+      "delete_confirm_title": "Confirm delete order",
+      "delete_confirm_content": "Are you sure you want to delete order {{orderNumber}}? This action cannot be undone.",
+      "shipping_fee": "Shipping fee",
+      "carrier": "Shipping carrier",
+      "tracking_number": "Tracking number",
+      "shipping_info": "Shipping information"
+    },
+    "products": {
+      "title": "Products",
+      "create": "Add Product",
+      "name": "Product Name",
+      "sku": "SKU",
+      "category": "Category",
+      "cost_price": "Cost Price",
+      "selling_price": "Selling Price",
+      "stock": {
+        "label": "Stock",
+        "in_stock": "In Stock",
+        "low_stock": "Low Stock",
+        "out_of_stock": "Out of Stock"
+      },
+      "unit": "Unit",
+      "description": "Description",
+      "images": "Images",
+      "low_price_warning": "Selling price is lower than cost price!",
+      "create_success": "Product created successfully",
+      "update_success": "Product updated successfully",
+      "bulk_delete_success": "Deleted {{count}} products",
+      "bulk_delete_confirm_title": "Confirm Delete Products",
+      "bulk_delete_confirm_content": "Are you sure you want to delete {{count}} selected products? This action cannot be undone."
+    },
+    "customers": {
+      "title": "Customers",
+      "create": "Add Customer",
+      "name": "Customer Name",
+      "phone": "Phone Number",
+      "email": "Email",
+      "address": "Address",
+      "tier": {
+        "label": "Tier",
+        "new": "New",
+        "regular": "Regular",
+        "vip": "VIP"
+      },
+      "total_orders": "Total Orders",
+      "total_spent": "Total Spent",
+      "note": "Note",
+      "create_success": "Customer created successfully",
+      "update_success": "Customer updated successfully",
+      "phone_exists": "Phone number already exists",
+      "delete_success": "Customer deleted successfully",
+      "delete_confirm_title": "Confirm Delete Customer",
+      "delete_confirm_content": "Are you sure you want to delete customer {{name}}? This action cannot be undone.",
+      "has_active_orders": "Cannot delete customer with active orders",
+      "bulk_delete_success": "Deleted {{count}} customers",
+      "bulk_delete_partial": "Deleted {{deleted}} customers, skipped {{skipped}} with active orders",
+      "bulk_delete_confirm_title": "Confirm Delete Customers",
+      "bulk_delete_confirm_content": "Are you sure you want to delete {{count}} selected customers? This action cannot be undone."
+    },
+    "address": {
+      "province_placeholder": "Province / City",
+      "district_placeholder": "District",
+      "ward_placeholder": "Ward / Commune",
+      "street_placeholder": "Street address"
+    },
+    "errors": {
+      "auth": {
+        "required": "Please login",
+        "invalid_credentials": "Invalid email or password",
+        "invalid_token": "Session expired"
+      },
+      "validation": {
+        "failed": "Validation failed",
+        "email_invalid": "Invalid email",
+        "password_min": "Password must be at least 8 characters",
+        "phone_invalid": "Invalid phone number (10 digits, starts with 0)"
+      },
+      "network": "Connection error. Please try again.",
+      "unknown": "An error occurred. Please try again."
+    }
+  }
+}

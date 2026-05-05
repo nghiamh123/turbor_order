@@ -1,0 +1,179 @@
+{
+  "vi": {
+    "app": {
+      "name": "TurboOrder",
+      "tagline": "Quản lí bán hàng thông minh"
+    },
+    "common": {
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "delete": "Xóa",
+      "edit": "Sửa",
+      "create": "Tạo mới",
+      "search": "Tìm kiếm...",
+      "filter": "Lọc",
+      "export": "Xuất",
+      "import": "Nhập",
+      "back": "Quay lại",
+      "confirm": "Xác nhận",
+      "loading": "Đang tải...",
+      "no_data": "Không có dữ liệu",
+      "not_updated": "Chưa cập nhật",
+      "actions": "Thao tác",
+      "all": "Tất cả",
+      "active": "Hoạt động",
+      "inactive": "Ngừng"
+    },
+    "auth": {
+      "login": "Đăng nhập",
+      "logout": "Đăng xuất",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "remember_me": "Ghi nhớ đăng nhập",
+      "login_success": "Đăng nhập thành công",
+      "login_failed": "Email hoặc mật khẩu không đúng"
+    },
+    "sidebar": {
+      "dashboard": "Bảng điều khiển",
+      "orders": "Đơn hàng",
+      "products": "Sản phẩm",
+      "customers": "Khách hàng",
+      "settings": "Cài đặt"
+    },
+    "dashboard": {
+      "title": "Tổng quan",
+      "revenue": "Doanh thu",
+      "profit": "Lợi nhuận",
+      "new_orders": "Đơn hàng mới",
+      "items_sold": "Sản phẩm đã bán",
+      "new_customers": "Khách hàng mới",
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua",
+      "this_week": "Tuần này",
+      "this_month": "Tháng này",
+      "last_month": "Tháng trước",
+      "this_year": "Năm nay",
+      "3_days_ago": "3 ngày trước",
+      "7_days_ago": "7 ngày trước",
+      "14_days_ago": "14 ngày trước",
+      "30_days_ago": "30 ngày trước",
+      "quick_actions": "Thao tác nhanh",
+      "create_order": "Tạo đơn hàng",
+      "add_product": "Thêm sản phẩm",
+      "add_customer": "Thêm khách hàng"
+    },
+    "orders": {
+      "title": "Đơn hàng",
+      "create": "Tạo đơn hàng",
+      "order_number": "Mã đơn",
+      "customer": "Khách hàng",
+      "total": "Tổng tiền",
+      "status": {
+        "label": "Trạng thái",
+        "new": "Mới",
+        "confirmed": "Đã xác nhận",
+        "shipping": "Đang giao",
+        "completed": "Hoàn thành",
+        "cancelled": "Đã hủy"
+      },
+      "date": "Ngày tạo",
+      "subtotal": "Tạm tính",
+      "discount": "Giảm giá",
+      "note": "Ghi chú",
+      "items": "Sản phẩm",
+      "quantity": "Số lượng",
+      "unit_price": "Đơn giá",
+      "add_item": "Thêm sản phẩm",
+      "select_customer": "Chọn khách hàng",
+      "create_success": "Tạo đơn hàng thành công",
+      "status_updated": "Cập nhật trạng thái thành công",
+      "cancel_reason": "Lí do hủy đơn",
+      "cancel_reason_placeholder": "Nhập lí do hủy...",
+      "cancel_confirm": "Bạn có chắc muốn hủy đơn này?",
+      "edit": "Sửa đơn hàng",
+      "update_success": "Cập nhật đơn hàng thành công",
+      "save_changes": "Lưu thay đổi",
+      "not_editable": "Chỉ có thể sửa đơn hàng chưa xác nhận",
+      "delete_success": "Xóa đơn hàng thành công",
+      "delete_confirm_title": "Xác nhận xóa đơn hàng",
+      "delete_confirm_content": "Bạn có chắc muốn xóa đơn hàng {{orderNumber}}? Hành động này không thể hoàn tác.",
+      "shipping_fee": "Phí vận chuyển",
+      "carrier": "Đơn vị vận chuyển",
+      "tracking_number": "Mã vận đơn",
+      "shipping_info": "Thông tin vận chuyển"
+    },
+    "products": {
+      "title": "Sản phẩm",
+      "create": "Thêm sản phẩm",
+      "name": "Tên sản phẩm",
+      "sku": "Mã SKU",
+      "category": "Danh mục",
+      "cost_price": "Giá gốc",
+      "selling_price": "Giá bán",
+      "stock": {
+        "label": "Tồn kho",
+        "in_stock": "Còn hàng",
+        "low_stock": "Sắp hết",
+        "out_of_stock": "Hết hàng"
+      },
+      "unit": "Đơn vị",
+      "description": "Mô tả",
+      "images": "Hình ảnh",
+      "low_price_warning": "Giá bán thấp hơn giá gốc!",
+      "create_success": "Thêm sản phẩm thành công",
+      "update_success": "Cập nhật sản phẩm thành công",
+      "bulk_delete_success": "Đã xóa {{count}} sản phẩm",
+      "bulk_delete_confirm_title": "Xác nhận xóa sản phẩm",
+      "bulk_delete_confirm_content": "Bạn có chắc muốn xóa {{count}} sản phẩm đã chọn? Hành động này không thể hoàn tác."
+    },
+    "customers": {
+      "title": "Khách hàng",
+      "create": "Thêm khách hàng",
+      "name": "Tên khách hàng",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "address": "Địa chỉ",
+      "tier": {
+        "label": "Phân loại",
+        "new": "Mới",
+        "regular": "Thường",
+        "vip": "VIP"
+      },
+      "total_orders": "Tổng đơn",
+      "total_spent": "Tổng chi",
+      "note": "Ghi chú",
+      "create_success": "Thêm khách hàng thành công",
+      "update_success": "Cập nhật khách hàng thành công",
+      "phone_exists": "Số điện thoại đã tồn tại",
+      "delete_success": "Xóa khách hàng thành công",
+      "delete_confirm_title": "Xác nhận xóa khách hàng",
+      "delete_confirm_content": "Bạn có chắc muốn xóa khách hàng {{name}}? Hành động này không thể hoàn tác.",
+      "has_active_orders": "Không thể xóa khách hàng đang có đơn hàng chưa hoàn thành",
+      "bulk_delete_success": "Đã xóa {{count}} khách hàng",
+      "bulk_delete_partial": "Đã xóa {{deleted}} khách hàng, bỏ qua {{skipped}} khách hàng có đơn hàng chưa hoàn thành",
+      "bulk_delete_confirm_title": "Xác nhận xóa khách hàng",
+      "bulk_delete_confirm_content": "Bạn có chắc muốn xóa {{count}} khách hàng đã chọn? Hành động này không thể hoàn tác."
+    },
+    "address": {
+      "province_placeholder": "Tỉnh / Thành phố",
+      "district_placeholder": "Quận / Huyện",
+      "ward_placeholder": "Phường / Xã",
+      "street_placeholder": "Số nhà, tên đường"
+    },
+    "errors": {
+      "auth": {
+        "required": "Vui lòng đăng nhập",
+        "invalid_credentials": "Email hoặc mật khẩu không đúng",
+        "invalid_token": "Phiên đăng nhập đã hết hạn"
+      },
+      "validation": {
+        "failed": "Dữ liệu không hợp lệ",
+        "email_invalid": "Email không hợp lệ",
+        "password_min": "Mật khẩu tối thiểu 8 ký tự",
+        "phone_invalid": "Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0)"
+      },
+      "network": "Lỗi kết nối. Vui lòng thử lại.",
+      "unknown": "Đã xảy ra lỗi. Vui lòng thử lại."
+    }
+  }
+}
