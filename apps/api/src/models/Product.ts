@@ -6,6 +6,8 @@ export interface IProduct extends Document {
   description?: string;
   category?: mongoose.Types.ObjectId;
   costPrice: number;
+  retailPrice: number;
+  wholesalePrice: number;
   sellingPrice: number;
   images: string[];
   stock: number;
@@ -39,9 +41,20 @@ const ProductSchema = new Schema<IProduct>(
       default: 0,
       min: [0, 'Cost price cannot be negative'],
     },
+    retailPrice: {
+      type: Number,
+      required: [true, 'Retail price is required'],
+      default: 0,
+      min: [0, 'Retail price cannot be negative'],
+    },
+    wholesalePrice: {
+      type: Number,
+      required: [true, 'Wholesale price is required'],
+      default: 0,
+      min: [0, 'Wholesale price cannot be negative'],
+    },
     sellingPrice: {
       type: Number,
-      required: [true, 'Selling price is required'],
       min: [0, 'Selling price cannot be negative'],
     },
     images: [{ type: String }],

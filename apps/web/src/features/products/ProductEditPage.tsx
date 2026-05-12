@@ -51,7 +51,7 @@ export default function ProductEditPage() {
       <Card style={{ maxWidth: 640 }}>
         <Form form={form} layout="vertical" onFinish={(v) => updateMut.mutate(v)} initialValues={{
           name: product.name, sku: product.sku, category: (product.category as Category)?._id,
-          costPrice: product.costPrice, sellingPrice: product.sellingPrice,
+          costPrice: product.costPrice, retailPrice: product.retailPrice, wholesalePrice: product.wholesalePrice,
           stock: product.stock, unit: product.unit, description: product.description,
         }}>
           <Form.Item name="name" label={t('products.name')} rules={[{ required: true }]}><Input /></Form.Item>
@@ -61,12 +61,15 @@ export default function ProductEditPage() {
               {categories?.map(c => <Select.Option key={c._id} value={c._id}>{c.name}</Select.Option>)}
             </Select>
           </Form.Item>
-          <Space size={16}>
+          <Space size={16} wrap>
             <Form.Item name="costPrice" label={t('products.cost_price')}>
-              <InputNumber min={0} style={{ width: 200 }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} addonAfter="₫" />
+              <InputNumber min={0} style={{ width: 180 }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} addonAfter="₫" />
             </Form.Item>
-            <Form.Item name="sellingPrice" label={t('products.selling_price')} rules={[{ required: true }]}>
-              <InputNumber min={0} style={{ width: 200 }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} addonAfter="₫" />
+            <Form.Item name="retailPrice" label={t('products.retail_price')} rules={[{ required: true }]}>
+              <InputNumber min={0} style={{ width: 180 }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} addonAfter="₫" />
+            </Form.Item>
+            <Form.Item name="wholesalePrice" label={t('products.wholesale_price')} rules={[{ required: true }]}>
+              <InputNumber min={0} style={{ width: 180 }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} addonAfter="₫" />
             </Form.Item>
           </Space>
           <Space size={16}>

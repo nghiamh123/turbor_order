@@ -162,9 +162,9 @@ export default function OrderDetailPage() {
       {isCancelled && (
         <Card style={{ marginBottom: 16, background: '#FFF2F0', borderColor: '#FFCCC7' }}>
           <Space><CloseCircleOutlined style={{ color: '#FF4D4F', fontSize: 20 }} />
-            <div><Text strong style={{ color: '#FF4D4F' }}>Đơn hàng đã bị hủy</Text>
+            <div><Text strong style={{ color: '#FF4D4F' }}>{t('orders.cancelled_title')}</Text>
               {order.statusHistory.find(h => h.to === 'cancelled')?.note && (
-                <div><Text type="secondary">Lí do: {order.statusHistory.find(h => h.to === 'cancelled')!.note}</Text></div>
+                <div><Text type="secondary">{t('orders.cancel_reason_label')}: {order.statusHistory.find(h => h.to === 'cancelled')!.note}</Text></div>
               )}
             </div>
           </Space>
@@ -178,7 +178,7 @@ export default function OrderDetailPage() {
               { title: t('products.name'), key: 'p', render: (_: unknown, r: Order['items'][0]) => (<div><div style={{ fontWeight: 500 }}>{r.productName}</div><Text type="secondary" style={{ fontSize: 12 }}>{r.sku}</Text></div>) },
               { title: t('orders.unit_price'), dataIndex: 'unitPrice', align: 'right', render: (v: number) => fmt(v) },
               { title: t('orders.quantity'), dataIndex: 'quantity', align: 'center' },
-              { title: 'Thành tiền', dataIndex: 'subtotal', align: 'right', render: (v: number) => <Text strong>{fmt(v)}</Text> },
+              { title: t('orders.subtotal'), dataIndex: 'subtotal', align: 'right', render: (v: number) => <Text strong>{fmt(v)}</Text> },
             ]} />
             <Divider style={{ margin: '12px 0' }} />
             <div style={{ maxWidth: 300, marginLeft: 'auto' }}>
@@ -225,7 +225,7 @@ export default function OrderDetailPage() {
               {order.note && <Descriptions.Item label={t('orders.note')}>{order.note}</Descriptions.Item>}
             </Descriptions>
           </Card>
-          <Card title="Lịch sử trạng thái">
+          <Card title={t('orders.status_history')}>
             <Timeline items={order.statusHistory.map(h => ({
               color: ORDER_STATUS[h.to as OrderStatus]?.color || '#1677FF',
               children: (<div><Tag color={ORDER_STATUS[h.to as OrderStatus]?.color}>{t(ORDER_STATUS[h.to as OrderStatus]?.label)}</Tag>
@@ -303,7 +303,7 @@ export default function OrderDetailPage() {
           </div>
           <Card size="small" style={{ background: '#f5f5f5', border: 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text>Tổng cộng mới:</Text>
+              <Text>{t('orders.new_total')}:</Text>
               <Text strong style={{ fontSize: 20, color: '#1677FF' }}>
                 {fmt(order.subtotal - order.discountAmount + (shippingFee || 0))}
               </Text>

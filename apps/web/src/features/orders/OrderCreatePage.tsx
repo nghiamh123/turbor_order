@@ -18,6 +18,8 @@ interface OrderItemRow {
   productName: string;
   sku: string;
   unitPrice: number;
+  retailPrice: number;
+  wholesalePrice: number;
   stock: number;
   quantity: number;
   subtotal: number;
@@ -79,7 +81,7 @@ export default function OrderCreatePage() {
   const handleAddProduct = () => {
     if (!selectedProductId) return;
     if (items.find((item) => item.productId === selectedProductId)) {
-      message.warning('Sản phẩm đã có trong đơn');
+      message.warning(t('orders.already_in_order'));
       return;
     }
 
@@ -87,7 +89,7 @@ export default function OrderCreatePage() {
     if (!product) return;
 
     if (product.stock <= 0) {
-      message.error('Sản phẩm đã hết hàng');
+      message.error(t('orders.out_of_stock'));
       return;
     }
 
@@ -98,10 +100,12 @@ export default function OrderCreatePage() {
         productId: product._id,
         productName: product.name,
         sku: product.sku,
-        unitPrice: product.sellingPrice,
+        unitPrice: product.retailPrice,
+        retailPrice: product.retailPrice,
+        wholesalePrice: product.wholesalePrice,
         stock: product.stock,
         quantity: 1,
-        subtotal: product.sellingPrice,
+        subtotal: product.retailPrice,
       },
     ]);
     setSelectedProductId(null);
@@ -110,11 +114,13 @@ export default function OrderCreatePage() {
   // ─── Update quantity ───
   const handleQuantityChange = (key: string, quantity: number) => {
     setItems((prev) =>
-      prev.map((item) =>
-        item.key === key
-          ? { ...item, quantity, subtotal: item.unitPrice * quantity }
-          : item
-      )
+      prev.map((item) => {
+        if (item.key === key) {
+          const unitPrice = quantity >= 5 ? item.wholesalePrice : item.retailPrice;
+          return { ...item, quantity, unitPrice, subtotal: unitPrice * quantity };
+        }
+        return item;
+      })
     );
   };
 
@@ -136,9 +142,9 @@ export default function OrderCreatePage() {
       const error = err as { response?: { data?: { error?: { code?: string } } } };
       const code = error.response?.data?.error?.code;
       if (code === 'INSUFFICIENT_STOCK') {
-        message.error('Không đủ tồn kho cho sản phẩm trong đơn');
+        message.error(t('orders.insufficient_stock'));
       } else if (code === 'CUSTOMER_NOT_FOUND') {
-        message.error('Khách hàng không tồn tại');
+        message.error(t('orders.customer_not_found'));
       } else {
         message.error(t('errors.unknown'));
       }
@@ -260,7 +266,7 @@ export default function OrderCreatePage() {
                   style={{ width: 300 }}
                   options={products?.filter(p => p.stock > 0).map((p) => ({
                     value: p._id,
-                    label: `${p.name} — ${formatCurrency(p.sellingPrice)} (${p.stock})`,
+                    label: `${p.name} — ${formatCurrency(p.retailPrice)} (${t('products.wholesale_tag')}: ${formatCurrency(p.wholesalePrice)}) (${p.stock})`,
                   }))}
                 />
                 <Button type="primary" icon={<PlusOutlined />} onClick={handleAddProduct} disabled={!selectedProductId}>

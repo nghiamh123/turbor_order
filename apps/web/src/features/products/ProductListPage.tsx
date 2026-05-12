@@ -80,9 +80,19 @@ export default function ProductListPage() {
       key: 'category',
     },
     {
-      title: t('products.selling_price'),
-      dataIndex: 'sellingPrice',
-      key: 'sellingPrice',
+      title: t('products.retail_price'),
+      dataIndex: 'retailPrice',
+      key: 'retailPrice',
+      sorter: true,
+      align: 'right',
+      render: (value: number) => (
+        <span style={{ fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(value)}</span>
+      ),
+    },
+    {
+      title: t('products.wholesale_price'),
+      dataIndex: 'wholesalePrice',
+      key: 'wholesalePrice',
       sorter: true,
       align: 'right',
       render: (value: number) => (

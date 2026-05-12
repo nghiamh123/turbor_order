@@ -73,6 +73,15 @@ export default function DashboardPage() {
       bgColor: '#FFF0F6',
     },
     {
+      title: t('dashboard.shipping_fee'),
+      value: data?.shippingFee.current ?? 0,
+      formatter: formatCurrency,
+      change: data?.shippingFee.changePercent ?? 0,
+      icon: <ShoppingCartOutlined />,
+      color: '#13C2C2',
+      bgColor: '#E6FFFB',
+    },
+    {
       title: t('dashboard.new_orders'),
       value: data?.newOrders.current ?? 0,
       change: data?.newOrders.changePercent ?? 0,

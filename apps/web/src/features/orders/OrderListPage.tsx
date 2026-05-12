@@ -56,6 +56,27 @@ export default function OrderListPage() {
       ),
     },
     {
+      title: t('orders.order_value'),
+      key: 'orderValue',
+      align: 'right',
+      render: (_, record: Order) => (
+        <span style={{ fontVariantNumeric: 'tabular-nums' }}>
+          {formatCurrency(record.total - (record.shippingFee || 0))}
+        </span>
+      ),
+    },
+    {
+      title: t('orders.shipping_fee'),
+      dataIndex: 'shippingFee',
+      key: 'shippingFee',
+      align: 'right',
+      render: (value: number) => (
+        <span style={{ color: 'rgba(0,0,0,0.45)', fontVariantNumeric: 'tabular-nums' }}>
+          {value ? formatCurrency(value) : '-'}
+        </span>
+      ),
+    },
+    {
       title: t('orders.total'),
       dataIndex: 'total',
       key: 'total',

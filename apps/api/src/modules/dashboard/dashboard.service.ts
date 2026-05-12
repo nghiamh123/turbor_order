@@ -24,6 +24,11 @@ export const dashboardService = {
         previous: previousData.profit,
         changePercent: this.calcPercent(currentData.profit, previousData.profit),
       },
+      shippingFee: {
+        current: currentData.shippingFee,
+        previous: previousData.shippingFee,
+        changePercent: this.calcPercent(currentData.shippingFee, previousData.shippingFee),
+      },
       newOrders: {
         current: currentData.orderCount,
         previous: previousData.orderCount,
@@ -53,7 +58,8 @@ export const dashboardService = {
       },
       {
         $project: {
-          total: 1,
+          revenueWithoutShipping: { $subtract: ['$total', { $ifNull: ['$shippingFee', 0] }] },
+          shippingFee: { $ifNull: ['$shippingFee', 0] },
           itemsCount: { $sum: '$items.quantity' },
           cost: {
             $reduce: {
@@ -67,7 +73,8 @@ export const dashboardService = {
       {
         $group: {
           _id: null,
-          revenue: { $sum: '$total' },
+          revenue: { $sum: '$revenueWithoutShipping' },
+          shippingFee: { $sum: '$shippingFee' },
           cost: { $sum: '$cost' },
           orderCount: { $sum: 1 },
           itemsSold: { $sum: '$itemsCount' },
@@ -77,6 +84,7 @@ export const dashboardService = {
         $project: {
           _id: 0,
           revenue: 1,
+          shippingFee: 1,
           orderCount: 1,
           itemsSold: 1,
           profit: { $subtract: ['$revenue', '$cost'] },
@@ -84,7 +92,7 @@ export const dashboardService = {
       },
     ]);
 
-    return result[0] || { revenue: 0, profit: 0, orderCount: 0, itemsSold: 0 };
+    return result[0] || { revenue: 0, profit: 0, shippingFee: 0, orderCount: 0, itemsSold: 0 };
   },
 
   /** Calculate percentage change */

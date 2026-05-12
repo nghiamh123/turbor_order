@@ -60,20 +60,29 @@ export default function ProductCreatePage() {
             </Select>
           </Form.Item>
 
-          <Space size={16}>
+          <Space size={16} wrap>
             <Form.Item name="costPrice" label={t('products.cost_price')}>
               <InputNumber
                 min={0}
-                style={{ width: 200 }}
+                style={{ width: 180 }}
                 formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 addonAfter="₫"
               />
             </Form.Item>
 
-            <Form.Item name="sellingPrice" label={t('products.selling_price')} rules={[{ required: true }]}>
+            <Form.Item name="retailPrice" label={t('products.retail_price')} rules={[{ required: true }]}>
               <InputNumber
                 min={0}
-                style={{ width: 200 }}
+                style={{ width: 180 }}
+                formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                addonAfter="₫"
+              />
+            </Form.Item>
+
+            <Form.Item name="wholesalePrice" label={t('products.wholesale_price')} rules={[{ required: true }]}>
+              <InputNumber
+                min={0}
+                style={{ width: 180 }}
                 formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 addonAfter="₫"
               />

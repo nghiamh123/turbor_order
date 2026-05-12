@@ -18,6 +18,8 @@ interface OrderItemRow {
   productName: string;
   sku: string;
   unitPrice: number;
+  retailPrice: number;
+  wholesalePrice: number;
   stock: number;
   quantity: number;
   subtotal: number;
@@ -94,7 +96,9 @@ export default function OrderEditPage() {
         productName: item.productName,
         sku: item.sku,
         unitPrice: item.unitPrice,
-        stock: 999, // Will be refreshed when products load
+        retailPrice: item.unitPrice, // Fallback if product not loaded yet
+        wholesalePrice: item.unitPrice, // Fallback
+        stock: 999,
         quantity: item.quantity,
         subtotal: item.subtotal,
       })));
@@ -114,7 +118,12 @@ export default function OrderEditPage() {
           // Add back the quantity from this order since it will be restored on save
           const origItem = order.items.find(i => i.product === item.productId);
           const reservedQty = origItem ? origItem.quantity : 0;
-          return { ...item, stock: product.stock + reservedQty };
+          return {
+            ...item,
+            stock: product.stock + reservedQty,
+            retailPrice: product.retailPrice,
+            wholesalePrice: product.wholesalePrice,
+          };
         }
         return item;
       }));
@@ -137,7 +146,7 @@ export default function OrderEditPage() {
   const handleAddProduct = () => {
     if (!selectedProductId) return;
     if (items.find((item) => item.productId === selectedProductId)) {
-      message.warning('Sản phẩm đã có trong đơn');
+      message.warning(t('orders.already_in_order'));
       return;
     }
 
@@ -149,7 +158,7 @@ export default function OrderEditPage() {
     const availableStock = product.stock + (origItem ? origItem.quantity : 0);
 
     if (availableStock <= 0) {
-      message.error('Sản phẩm đã hết hàng');
+      message.error(t('orders.out_of_stock'));
       return;
     }
 
@@ -160,10 +169,12 @@ export default function OrderEditPage() {
         productId: product._id,
         productName: product.name,
         sku: product.sku,
-        unitPrice: product.sellingPrice,
+        unitPrice: product.retailPrice,
+        retailPrice: product.retailPrice,
+        wholesalePrice: product.wholesalePrice,
         stock: availableStock,
         quantity: 1,
-        subtotal: product.sellingPrice,
+        subtotal: product.retailPrice,
       },
     ]);
     setSelectedProductId(null);
@@ -172,11 +183,13 @@ export default function OrderEditPage() {
   // ─── Update quantity ───
   const handleQuantityChange = (key: string, quantity: number) => {
     setItems((prev) =>
-      prev.map((item) =>
-        item.key === key
-          ? { ...item, quantity, subtotal: item.unitPrice * quantity }
-          : item
-      )
+      prev.map((item) => {
+        if (item.key === key) {
+          const unitPrice = quantity >= 5 ? item.wholesalePrice : item.retailPrice;
+          return { ...item, quantity, unitPrice, subtotal: unitPrice * quantity };
+        }
+        return item;
+      })
     );
   };
 
@@ -199,7 +212,7 @@ export default function OrderEditPage() {
       const error = err as { response?: { data?: { error?: { code?: string } } } };
       const code = error.response?.data?.error?.code;
       if (code === 'INSUFFICIENT_STOCK') {
-        message.error('Không đủ tồn kho cho sản phẩm trong đơn');
+        message.error(t('orders.insufficient_stock'));
       } else if (code === 'ORDER_NOT_EDITABLE') {
         message.error(t('orders.not_editable'));
       } else {
@@ -330,15 +343,15 @@ export default function OrderEditPage() {
                   onSearch={setProductSearch}
                   filterOption={false}
                   style={{ width: 300 }}
-                  options={products?.filter(p => {
-                    // Show products not already in the order, or out of stock
+                  options={products?.map((p) => {
                     const origItem = order.items.find(i => i.product === p._id);
                     const availableStock = p.stock + (origItem ? origItem.quantity : 0);
-                    return availableStock > 0;
-                  }).map((p) => ({
-                    value: p._id,
-                    label: `${p.name} — ${formatCurrency(p.sellingPrice)} (${p.stock})`,
-                  }))}
+                    return {
+                      value: p._id,
+                      label: `${p.name} — ${formatCurrency(p.retailPrice)} (${t('products.wholesale_tag')}: ${formatCurrency(p.wholesalePrice)}) (${availableStock})`,
+                      disabled: availableStock <= 0,
+                    };
+                  })}
                 />
                 <Button type="primary" icon={<PlusOutlined />} onClick={handleAddProduct} disabled={!selectedProductId}>
                   {t('orders.add_item')}

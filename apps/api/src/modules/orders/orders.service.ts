@@ -99,14 +99,15 @@ export const orderService = {
           throw new AppError(422, 'INSUFFICIENT_STOCK', 'errors.orders.insufficient_stock');
         }
 
+        const unitPrice = item.quantity >= 5 ? product.wholesalePrice : product.retailPrice;
         return {
           product: product._id,
           productName: product.name,
           sku: product.sku,
-          unitPrice: product.sellingPrice,
+          unitPrice,
           costPrice: product.costPrice,
           quantity: item.quantity,
-          subtotal: product.sellingPrice * item.quantity,
+          subtotal: unitPrice * item.quantity,
         };
       });
 
@@ -304,14 +305,15 @@ export const orderService = {
           throw new AppError(422, 'INSUFFICIENT_STOCK', 'errors.orders.insufficient_stock');
         }
 
+        const unitPrice = item.quantity >= 5 ? product.wholesalePrice : product.retailPrice;
         return {
           product: product._id,
           productName: product.name,
           sku: product.sku,
-          unitPrice: product.sellingPrice,
+          unitPrice,
           costPrice: product.costPrice,
           quantity: item.quantity,
-          subtotal: product.sellingPrice * item.quantity,
+          subtotal: unitPrice * item.quantity,
         };
       });
 

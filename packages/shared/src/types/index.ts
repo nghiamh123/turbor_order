@@ -28,6 +28,8 @@ export interface Product {
   description?: string;
   category?: Category;
   costPrice: number;
+  retailPrice: number;
+  wholesalePrice: number;
   sellingPrice: number;
   images: string[];
   stock: number;
@@ -44,7 +46,9 @@ export interface CreateProductRequest {
   description?: string;
   category?: string;
   costPrice?: number;
-  sellingPrice: number;
+  retailPrice: number;
+  wholesalePrice: number;
+  sellingPrice?: number;
   stock: number;
   lowStockThreshold?: number;
   unit?: string;
@@ -187,6 +191,7 @@ export interface DashboardOverviewParams {
 export interface DashboardOverview {
   revenue: KpiMetric;
   profit: KpiMetric;
+  shippingFee: KpiMetric;
   newOrders: KpiMetric;
   itemsSold: KpiMetric;
   newCustomers: KpiMetric;

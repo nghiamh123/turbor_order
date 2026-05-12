@@ -49,16 +49,16 @@ async function seed() {
 
   // ─── Create products ───
   const products = await Product.create([
-    { name: 'Áo thun nam basic', sku: 'SP-0001', category: categories[0]._id, costPrice: 80000, sellingPrice: 150000, stock: 50, unit: 'cái' },
-    { name: 'Áo sơ mi trắng', sku: 'SP-0002', category: categories[0]._id, costPrice: 120000, sellingPrice: 250000, stock: 30, unit: 'cái' },
-    { name: 'Áo khoác hoodie', sku: 'SP-0003', category: categories[0]._id, costPrice: 180000, sellingPrice: 350000, stock: 20, unit: 'cái' },
-    { name: 'Quần jean slim fit', sku: 'SP-0004', category: categories[1]._id, costPrice: 200000, sellingPrice: 400000, stock: 25, unit: 'cái' },
-    { name: 'Quần short kaki', sku: 'SP-0005', category: categories[1]._id, costPrice: 100000, sellingPrice: 200000, stock: 40, unit: 'cái' },
-    { name: 'Giày sneaker trắng', sku: 'SP-0006', category: categories[2]._id, costPrice: 400000, sellingPrice: 890000, stock: 15, unit: 'đôi' },
-    { name: 'Dép quai ngang', sku: 'SP-0007', category: categories[2]._id, costPrice: 50000, sellingPrice: 120000, stock: 60, unit: 'đôi' },
-    { name: 'Nón snapback', sku: 'SP-0008', category: categories[3]._id, costPrice: 60000, sellingPrice: 150000, stock: 35, unit: 'cái' },
-    { name: 'Túi tote canvas', sku: 'SP-0009', category: categories[3]._id, costPrice: 80000, sellingPrice: 180000, stock: 8, lowStockThreshold: 10, unit: 'cái' },
-    { name: 'Kính mát unisex', sku: 'SP-0010', category: categories[3]._id, costPrice: 150000, sellingPrice: 320000, stock: 0, unit: 'cái' },
+    { name: 'Áo thun nam basic', sku: 'SP-0001', category: categories[0]._id, costPrice: 80000, retailPrice: 150000, wholesalePrice: 120000, sellingPrice: 150000, stock: 50, unit: 'cái' },
+    { name: 'Áo sơ mi trắng', sku: 'SP-0002', category: categories[0]._id, costPrice: 120000, retailPrice: 250000, wholesalePrice: 200000, sellingPrice: 250000, stock: 30, unit: 'cái' },
+    { name: 'Áo khoác hoodie', sku: 'SP-0003', category: categories[0]._id, costPrice: 180000, retailPrice: 350000, wholesalePrice: 280000, sellingPrice: 350000, stock: 20, unit: 'cái' },
+    { name: 'Quần jean slim fit', sku: 'SP-0004', category: categories[1]._id, costPrice: 200000, retailPrice: 400000, wholesalePrice: 320000, sellingPrice: 400000, stock: 25, unit: 'cái' },
+    { name: 'Quần short kaki', sku: 'SP-0005', category: categories[1]._id, costPrice: 100000, retailPrice: 200000, wholesalePrice: 160000, sellingPrice: 200000, stock: 40, unit: 'cái' },
+    { name: 'Giày sneaker trắng', sku: 'SP-0006', category: categories[2]._id, costPrice: 400000, retailPrice: 890000, wholesalePrice: 700000, sellingPrice: 890000, stock: 15, unit: 'đôi' },
+    { name: 'Dép quai ngang', sku: 'SP-0007', category: categories[2]._id, costPrice: 50000, retailPrice: 120000, wholesalePrice: 90000, sellingPrice: 120000, stock: 60, unit: 'đôi' },
+    { name: 'Nón snapback', sku: 'SP-0008', category: categories[3]._id, costPrice: 60000, retailPrice: 150000, wholesalePrice: 120000, sellingPrice: 150000, stock: 35, unit: 'cái' },
+    { name: 'Túi tote canvas', sku: 'SP-0009', category: categories[3]._id, costPrice: 80000, retailPrice: 180000, wholesalePrice: 140000, sellingPrice: 180000, stock: 8, lowStockThreshold: 10, unit: 'cái' },
+    { name: 'Kính mát unisex', sku: 'SP-0010', category: categories[3]._id, costPrice: 150000, retailPrice: 320000, wholesalePrice: 250000, sellingPrice: 320000, stock: 0, unit: 'cái' },
   ]);
   console.log(`  ✅ ${products.length} products created`);
 
