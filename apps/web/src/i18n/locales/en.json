@@ -168,6 +168,20 @@
       "ward_placeholder": "Ward / Commune",
       "street_placeholder": "Street address"
     },
+    "tracking": {
+      "title": "Shipment Tracking",
+      "sync_now": "Sync Now",
+      "syncing": "Fetching tracking info...",
+      "sync_error": "Failed to sync tracking, please try again",
+      "sync_success": "Synced successfully!",
+      "last_sync": "Last updated",
+      "no_tracking_number": "No tracking number available",
+      "no_events": "No shipment events yet. Click Sync to fetch updates.",
+      "no_events_after_sync": "No tracking information found",
+      "no_events_after_sync_desc": "The tracking number was not found in Viettel Post system. This may be a test/sandbox environment. Verify the tracking number or contact VTP to ensure the shipment was created.",
+      "track_on_vtp": "View on Viettel Post",
+      "open_vtp": "Open Viettel Post tracking page"
+    },
     "errors": {
       "auth": {
         "required": "Please login",

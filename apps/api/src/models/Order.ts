@@ -12,6 +12,14 @@ export interface IOrderItem {
   subtotal: number;
 }
 
+export interface ITrackingEvent {
+  status: string;
+  statusName: string;
+  location: string;
+  timestamp: Date;
+  note?: string;
+}
+
 export interface IStatusHistory {
   from: string | null;
   to: string;
@@ -52,6 +60,8 @@ export interface IOrder extends Document {
   trackingNumber?: string;
   shippingCarrier?: string;
   shippingFee?: number;
+  trackingEvents?: ITrackingEvent[];
+  lastTrackingSync?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -75,6 +85,17 @@ const StatusHistorySchema = new Schema<IStatusHistory>(
     from: { type: String, default: null },
     to: { type: String, required: true },
     changedAt: { type: Date, default: Date.now },
+    note: { type: String, default: '' },
+  },
+  { _id: false }
+);
+
+const TrackingEventSchema = new Schema<ITrackingEvent>(
+  {
+    status: { type: String, required: true },
+    statusName: { type: String, required: true },
+    location: { type: String, default: '' },
+    timestamp: { type: Date, required: true },
     note: { type: String, default: '' },
   },
   { _id: false }
@@ -132,6 +153,8 @@ const OrderSchema = new Schema<IOrder>(
     trackingNumber: { type: String },
     shippingCarrier: { type: String },
     shippingFee: { type: Number, default: 0 },
+    trackingEvents: { type: [TrackingEventSchema], default: [] },
+    lastTrackingSync: { type: Date },
   },
   { timestamps: true }
 );

@@ -25,4 +25,10 @@ export const config = {
   log: {
     level: process.env.LOG_LEVEL || 'debug',
   },
+
+  viettelpost: {
+    apiUrl: process.env.VIETTELPOST_API_URL || 'https://partnerdev.viettelpost.vn/v2',
+    username: process.env.VIETTELPOST_USERNAME || '',
+    password: process.env.VIETTELPOST_PASSWORD || '',
+  },
 } as const;

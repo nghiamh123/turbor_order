@@ -3,6 +3,7 @@ import { Order, Product, Customer } from '../../models/index.js';
 import { AppError } from '../../middleware/index.js';
 import { ORDER_STATUS_TRANSITIONS } from '@turboorder/shared';
 import { customerService } from '../customers/customers.service.js';
+import { viettelPostService } from '../../lib/viettelpost.service.js';
 import type { CreateOrderRequest, OrderQueryParams, OrderStatus, UpdateOrderStatusRequest } from '@turboorder/shared';
 import type { FilterQuery } from 'mongoose';
 import type { IOrder } from '../../models/Order.js';
@@ -454,5 +455,49 @@ export const orderService = {
 
     const lastNum = parseInt(lastOrder.orderNumber.replace(prefix, ''), 10);
     return `${prefix}${String(lastNum + 1).padStart(4, '0')}`;
+  },
+
+  /**
+   * Sync tracking events from Viettel Post API for an order.
+   * Only works if order has trackingNumber and shippingCarrier contains 'Viettel'.
+   */
+  async syncTracking(id: string) {
+    const order = await Order.findById(id);
+    if (!order) {
+      throw new AppError(404, 'ORDER_NOT_FOUND', 'errors.orders.not_found');
+    }
+
+    if (!order.trackingNumber) {
+      throw new AppError(422, 'NO_TRACKING_NUMBER', 'errors.orders.no_tracking_number');
+    }
+
+    // Fetch from VTP API
+    const events = await viettelPostService.trackOrder(order.trackingNumber);
+
+    // Update order with new tracking events
+    order.trackingEvents = events;
+    order.lastTrackingSync = new Date();
+
+    // Auto-sync order status based on latest VTP event
+    if (events.length > 0) {
+      const latestEvent = events[events.length - 1];
+      const mappedStatus = viettelPostService.mapToOrderStatus(latestEvent.status);
+
+      if (mappedStatus && mappedStatus !== order.status) {
+        const allowedTransitions = ORDER_STATUS_TRANSITIONS[order.status] || [];
+        if (allowedTransitions.includes(mappedStatus)) {
+          order.statusHistory.push({
+            from: order.status,
+            to: mappedStatus,
+            changedAt: new Date(),
+            note: `[Viettel Post] ${latestEvent.statusName}`,
+          });
+          order.status = mappedStatus;
+        }
+      }
+    }
+
+    await order.save();
+    return order.toObject();
   },
 };

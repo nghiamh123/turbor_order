@@ -8,6 +8,7 @@ import api from '@/lib/api';
 import { ORDER_STATUS, ORDER_STATUS_TRANSITIONS } from '@turboorder/shared';
 import type { Order, OrderStatus } from '@turboorder/shared';
 import dayjs from 'dayjs';
+import TrackingTimeline from './components/TrackingTimeline';
 
 const { Title, Text } = Typography;
 const STATUS_STEPS = ['new', 'confirmed', 'shipping', 'completed'] as const;
@@ -202,6 +203,13 @@ export default function OrderDetailPage() {
               </div>
             </div>
           </Card>
+
+          {/* Tracking */}
+          {order.trackingNumber && (
+            <Card title={t('tracking.title')} style={{ marginBottom: 16 }}>
+              <TrackingTimeline order={order} />
+            </Card>
+          )}
         </Col>
         <Col xs={24} lg={8}>
           <Card title={t('orders.customer')} style={{ marginBottom: 16 }}>

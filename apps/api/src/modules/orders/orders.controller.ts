@@ -43,4 +43,11 @@ export const orderController = {
       res.json({ success: true, data: null });
     } catch (error) { next(error); }
   },
+
+  async syncTracking(req: Request, res: Response, next: NextFunction) {
+    try {
+      const order = await orderService.syncTracking(req.params.id);
+      res.json({ success: true, data: order });
+    } catch (error) { next(error); }
+  },
 };

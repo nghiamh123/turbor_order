@@ -10,6 +10,7 @@ router.get('/:id', orderController.getById);
 router.post('/', validate(createOrderSchema), orderController.create);
 router.put('/:id', validate(updateOrderSchema), orderController.update);
 router.patch('/:id/status', validate(updateStatusSchema), orderController.updateStatus);
+router.post('/:id/sync-tracking', orderController.syncTracking);
 router.delete('/:id', orderController.delete);
 
 export const orderRoutes = router;

@@ -131,6 +131,15 @@ export interface StatusHistoryEntry {
   note: string;
 }
 
+// ─── Tracking ───
+export interface TrackingEvent {
+  status: string;       // Mã trạng thái VTP
+  statusName: string;   // Tên trạng thái (VD: "Đang vận chuyển")
+  location: string;     // Địa điểm xử lý
+  timestamp: string;    // ISO date string
+  note?: string;        // Ghi chú từ VTP
+}
+
 export interface Order {
   _id: string;
   orderNumber: string;
@@ -152,6 +161,8 @@ export interface Order {
   trackingNumber?: string;
   shippingCarrier?: string;
   shippingFee?: number;
+  trackingEvents?: TrackingEvent[];
+  lastTrackingSync?: string;
   createdAt: string;
   updatedAt: string;
 }
